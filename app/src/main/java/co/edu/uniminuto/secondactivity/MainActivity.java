@@ -2,6 +2,8 @@ package co.edu.uniminuto.secondactivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,6 +20,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText etTask;
     private Button btnAdd;
     private ListView listTask;
+    private EditText etSearch;
 
     // Propio de aqui
     private ArrayList<String> arrayList;
@@ -44,8 +49,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
         initObject();
+        setEtSearch();
         secondActivity();
         setActivityResultLauncher();
+
+
         // Generar evento click -> Agregar tarea
         this.btnAdd.setOnClickListener(this::addTask);
     }
@@ -79,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 result -> {
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                         ArrayList<String> updatedList = result.getData().getStringArrayListExtra("updatedList");
+                        etSearch.setText("");
                         if (updatedList != null) {
                             arrayList.clear();
                             arrayList.addAll(updatedList);
@@ -88,8 +97,38 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    // Buscardor de tareas
+    private void setEtSearch () {
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                taskFilter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+    }
+
+    // Filtro de tareas
+    private void taskFilter (String searchText) {
+        List<String> listFiltered = arrayList.stream()
+                .filter(listTask -> listTask
+                .toLowerCase()
+                .contains(searchText.toLowerCase()))
+                .collect(Collectors.toList());
+        adapter.clear();
+        adapter.addAll(listFiltered);
+        adapter.notifyDataSetChanged();
+    }
+
+    // Inicializador
     private void initObject(){
         this.etTask = findViewById(R.id.etTask);
+        this.etSearch = findViewById(R.id.etSearch);
         this.btnAdd = findViewById(R.id.btnAdd);
         this.listTask = findViewById(R.id.listTask);
         this.arrayList = new ArrayList<>();

@@ -58,18 +58,19 @@ public class MainActivity2 extends AppCompatActivity {
         listViewTask.setOnItemClickListener((parent, view, position, id) -> {
             String removedTask = arrayList.remove(position);
             adapter.notifyDataSetChanged();
-            Toast.makeText(this, "Eliminado: " + removedTask, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Tarea Eliminada: " + removedTask, Toast.LENGTH_SHORT).show();
             updateResult();
         });
     }
 
-    // Actualizar lista
+    // Enviar lista actulizada a MainActivity
     private void updateResult() {
         Intent resultIntent = new Intent();
         resultIntent.putStringArrayListExtra("updatedList", arrayList);
         setResult(RESULT_OK, resultIntent);
     }
 
+    // Inicializador
     private void initObject(){
         this.btnBack = findViewById(R.id.btnBack);
         this.listViewTask = findViewById(R.id.listViewTask);

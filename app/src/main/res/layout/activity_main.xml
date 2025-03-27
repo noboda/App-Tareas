@@ -10,15 +10,31 @@
     tools:context=".MainActivity">
 
     <EditText
+        android:id="@+id/etSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/etSearch"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:padding="4dp"
+        android:text="" />
+
+    <ListView
+        android:id="@+id/listTask"
+        android:layout_width="match_parent"
+        android:layout_height="579dp" />
+
+    <EditText
         android:id="@+id/etTask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:ems="10"
-        android:inputType="text"
-        android:padding="4dp"
-        android:minHeight="48dp"
         android:hint="@string/etTask"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:padding="4dp"
         android:text="" />
 
     <Button
@@ -27,10 +43,5 @@
         android:layout_height="wrap_content"
         android:padding="4dp"
         android:text="@string/btnAdd" />
-
-    <ListView
-        android:id="@+id/listTask"
-        android:layout_width="match_parent"
-        android:layout_height="579dp" />
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Tareas</string>
     <string name="etTask">Agrega la tarea</string>
-    <string name="btnAdd">Guarda Tarea</string>
+    <string name="btnAdd">Guarda tarea</string>
     <string name="btnBack">Regresar</string>
+    <string name="etSearch">Buscar tarea</string>
 </resources>
