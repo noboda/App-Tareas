@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="4dp"
     tools:context=".MainActivity2">
 
     <ListView
         android:id="@+id/listViewTask"
         android:layout_width="wrap_content"
-        android:layout_height="659dp" />
+        android:layout_height="659dp"
+        android:paddingTop="35dp" />
 
     <Button
         android:id="@+id/btnBack"
